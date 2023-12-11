@@ -1,0 +1,12 @@
+services:
+  dev_env:
+    build: 
+      context: .
+      args:
+        - WORKING_DIR=$WORKING_DIR
+    image: vscode-server
+    ports:
+      - $PORT:$VS_PORT
+    volumes:
+      - $WDIR:$WORKING_DIR
+    command: [ "/opt/vscode-server/start_code_server.sh", $OPTIONS ]
