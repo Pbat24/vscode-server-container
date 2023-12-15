@@ -1,4 +1,6 @@
 #!/bin/bash
 
 # Optional packages
-apt install vim -y
+apt install -y \
+    vim \
+    git
