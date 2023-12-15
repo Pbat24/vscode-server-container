@@ -5,16 +5,21 @@ This Docker Compose solution is specifically designed to execute Visual Studio C
 ## Quick Start
 
 ```bash
+# Verified for MAC OS
+
 # The simplest command will initiate the VSCode Server on localhost:8000?tkn=[TOKEN]
 # It uses the current directory as the working directory
-docker compose -d
+UID=${UID} GID=${GID} ID=${USER} docker compose -d
+
+# Add the --build option if you always want to start with a rebuilt image
+UID=${UID} GID=${GID} ID=${USER} docker compose -d --build
 ```
 
 Once the Visual Studio Code Server is operational, you can connect to it using any modern web browser. Enter the local address followed by the port number in your browser's address bar: `http://localhost:port_number?tkn=[TOKEN]`.
 
 You can now start coding in your preferred language, with all the features and convenience of Visual Studio Code in your browser. This includes IntelliSense, debugging, Git commands, extensions, and more.
 
-To stop the server, use the command `docker stop vscode_server_container-dev_env-1` in the terminal. This will cease all processes related to the Visual Studio Code Server, freeing up system resources.
+To stop the server, use the command `docker compose down` in the terminal. This will cease all processes related to the Visual Studio Code Server, freeing up system resources.
 
 Remember, this Docker Compose solution's main advantage is that it provides a consistent and reliable development environment, eliminating the need to manually set up your IDE each time. This makes software development much smoother and more efficient.
 
@@ -29,5 +34,5 @@ Remember, this Docker Compose solution's main advantage is that it provides a co
 ```bash
 # disable connection token, specifies a different working directory,
 # and changes the web port which will kick off the VSCode Server on localhost:8888
-WDIR=/home/user/dev OPTIONS="-d" PORT=8888 docker compose -d
+WDIR=/home/user/dev OPTIONS="-d" UID=${UID} GID=${GID} ID=${USER} PORT=8888 docker compose -d
 ```
