@@ -33,6 +33,7 @@ while getopts ":hd" opt; do
 done
 
 source /opt/vscode-server/.env
+eval `ssh-agent`
 
 HOST_IP=$(ifconfig eth0 | awk '/inet/{print $2}')
 echo "'Working Directory $WORKING_DIR'"
