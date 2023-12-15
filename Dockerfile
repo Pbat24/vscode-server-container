@@ -3,6 +3,12 @@ FROM ubuntu:22.04
 # defined in .env or based through a environmental variable
 ARG WORKING_DIR
 
+# The following lines are needed for creating an existing user within the image
+ARG UID
+ARG GID
+ARG ID
+RUN useradd --create-home --no-log-init -u "${UID}" -g "${GID}" "${ID}"
+
 # Installs and sets up the required binaries for the VS Code Server to work
 COPY scripts/setup_vscode.sh /setup/
 RUN /setup/setup_vscode.sh
@@ -18,6 +24,10 @@ RUN echo "export PATH=\$PATH:/opt/vscode-server" >> /root/.bashrc
 
 # The working directory points to the mounted source used for development
 WORKDIR $WORKING_DIR
+
+USER "${ID}"
+#COPY scripts/config /home/${ID}/.ssh/
+
 
 ENTRYPOINT ["/bin/bash"]
 CMD [ "/opt/vscode-server/start_code_server.sh" ]

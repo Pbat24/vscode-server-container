@@ -4,9 +4,17 @@ services:
       context: .
       args:
         - WORKING_DIR=$WORKING_DIR
+        - UID=$UID
+        - GID=$GID
+        - ID=$USER
     image: vscode-server
+    user: "${UID}:${GID}"
     ports:
       - $PORT:$VS_PORT
+    environment:
+      - SSH_AUTH_SOCK:${SSH_AUTH_SOCK}
     volumes:
       - $WDIR:$WORKING_DIR
+      - ${SSH_KEY}:/home/${ID}/.ssh/id_github
+    working_dir: $WORKING_DIR
     command: [ "/opt/vscode-server/start_code_server.sh", $OPTIONS ]

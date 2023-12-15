@@ -36,4 +36,4 @@ source /opt/vscode-server/.env
 
 HOST_IP=$(ifconfig eth0 | awk '/inet/{print $2}')
 echo "'Working Directory $WORKING_DIR'"
-code serve-web --port $VS_PORT --user-data-dir $WORKING_DIR --host $HOST_IP $DISABLE_CONN_TOKEN
+code serve-web --port $VS_PORT --user-data-dir $WORKING_DIR --server-data-dir $WORKING_DIR --cli-data-dir $WORKING_DIR --host $HOST_IP $DISABLE_CONN_TOKEN
