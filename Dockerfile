@@ -26,7 +26,7 @@ RUN echo "export PATH=\$PATH:/opt/vscode-server" >> /root/.bashrc
 WORKDIR $WORKING_DIR
 
 USER "${ID}"
-#COPY scripts/config /home/${ID}/.ssh/
+COPY scripts/config /home/${ID}/.ssh/
 
 
 ENTRYPOINT ["/bin/bash"]
