@@ -32,7 +32,7 @@ Remember, this Docker Compose solution's main advantage is that it provides a co
 - OPTIONS - This variable passes options used to configure the VS Code Server start-up.
     - d allows the server to accept connections without tokens
     - h displays the usage printout
-- WDIR - Overrides the default working directory. Using a directory that doesnât exist will cause the container to fail when starting
+- WDIR - Overrides the default working directory. Using a directory that doesn't exist will cause the container to fail when starting
 - PORT - Overrides the default web port of 8000
 
 ```bash
