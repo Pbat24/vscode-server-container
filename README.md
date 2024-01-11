@@ -4,26 +4,32 @@ This Docker Compose solution is specifically designed to execute Visual Studio C
 
 ## Quick Start
 
-You will need to specify you USER creds and the location of your github ssh key. **IT'S HIGHLY RECOMMENDED THAT YOU USE AN SSH KEY THAT HAS THE PASSPHRASE.**
-
 ```bash
-# Verified for MAC OS
+# Verified for MAC and Ubuntu OS
+
+# Configures the environmental variables needed to keep your permissions in tact
+./setenv.sh
 
 # The simplest command will initiate the VSCode Server on localhost:8000?tkn=[TOKEN]
-# UID, GID, and ID are needed so your not running in VS Code as root and allows you to keep your existing file permissions
-# SSH_KEY location is needed in order to have the ability of managing your code with git from within VS Code
 # It uses the current directory as the working directory
-UID=${UID} GID=${GID} ID=${USER} SSH_KEY=/home/user/.ssh/id_github docker compose -d
+# [OPTIONAL] Add the `-d` option if you want the container to run in the background
+# [OPTIONAL] Add the `--build` option if you always want to start with a rebuilt image
+docker compose --env-file .env.ids --env-file .env -d --build 
+```
 
-# Add the --build option if you always want to start with a rebuilt image
-UID=${UID} GID=${GID} ID=${USER} SSH_KEY=/home/user/.ssh/id_github docker compose -d --build
+If you need git support, use this `docker compose` command in place of the previous command.
+You will need to specify the location of your git repo ssh key. **IT'S HIGHLY RECOMMENDED THAT YOU USE AN SSH KEY THAT HAS THE PASSPHRASE.**
+
+```bash
+# Share the SSH_KEY location is needed if you need the ability of managing your code with git from within VS Code
+SSH_KEY=/home/user/.ssh/id_git docker compose --env-file .env.ids --env-file .env -d
 ```
 
 Once the Visual Studio Code Server is operational, you can connect to it using any modern web browser. Enter the local address followed by the port number in your browser's address bar: `http://localhost:port_number?tkn=[TOKEN]`.
 
 You can now start coding in your preferred language, with all the features and convenience of Visual Studio Code in your browser. This includes IntelliSense, debugging, Git commands, extensions, and more.
 
-To stop the server, use the command `docker compose down` in the terminal. This will cease all processes related to the Visual Studio Code Server, freeing up system resources.
+To stop the server, use `ctrl-c`. If you kicked off the container with `-d`, use the command `docker compose down` in the terminal. This will cease all processes related to the Visual Studio Code Server, freeing up system resources.
 
 Remember, this Docker Compose solution's main advantage is that it provides a consistent and reliable development environment, eliminating the need to manually set up your IDE each time. This makes software development much smoother and more efficient.
 
@@ -38,7 +44,7 @@ Remember, this Docker Compose solution's main advantage is that it provides a co
 ```bash
 # disable connection token, specifies a different working directory,
 # and changes the web port which will kick off the VSCode Server on localhost:8888
-WDIR=/home/user/dev OPTIONS="-d" UID=${UID} GID=${GID} ID=${USER} SSH_KEY=/home/user/.ssh/id_github PORT=8888 docker compose -d
+WDIR=/home/user/dev OPTIONS="-d" SSH_KEY=/home/user/.ssh/id_git PORT=8888 docker compose --env-file .env.ids --env-file .env -d
 ```
 
 ## Recommendations

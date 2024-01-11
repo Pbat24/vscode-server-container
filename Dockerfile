@@ -4,13 +4,15 @@ FROM ubuntu:22.04
 ARG WORKING_DIR
 
 # The following lines are needed for creating an existing user within the image
-ARG UID
-ARG GID
-ARG ID
-RUN useradd --create-home --no-log-init -u "${UID}" -g "${GID}" "${ID}"
+ARG USER_ID
+ARG GRP_ID
+ARG USER_NAME
+RUN groupadd -g "${GRP_ID}" default
+RUN useradd --create-home --no-log-init -u "${USER_ID}" -g "${GRP_ID}" "${USER_NAME}"
 
 # Installs and sets up the required binaries for the VS Code Server to work
 COPY scripts/setup_vscode.sh /setup/
+COPY *.deb /setup/
 RUN /setup/setup_vscode.sh
 
 # Optional packages that are helpful
@@ -25,10 +27,10 @@ RUN echo "export PATH=\$PATH:/opt/vscode-server" >> /root/.bashrc
 # The working directory points to the mounted source used for development
 WORKDIR $WORKING_DIR
 
-USER "${ID}"
-COPY --chown=${UID}:${GID} scripts/config /home/${ID}/.ssh/
-RUN echo "export PATH=\$PATH:/opt/vscode-server" >> /home/${ID}/.bashrc
+USER "${USER_NAME}"
+COPY --chown=${USER_ID}:${GRP_ID} scripts/config /home/${USER_NAME}/.ssh/
+RUN echo "export PATH=\$PATH:/opt/vscode-server" >> /home/${USER_NAME}/.bashrc
 
 
 ENTRYPOINT ["/bin/bash"]
-CMD [ "/opt/vscode-server/start_code_server.sh" ]
+#CMD [ "/opt/vscode-server/start_code_server.sh" ]
