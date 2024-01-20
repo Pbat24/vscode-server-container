@@ -14,7 +14,7 @@ This Docker Compose solution is specifically designed to execute Visual Studio C
 # It uses the current directory as the working directory
 # [OPTIONAL] Add the `-d` option if you want the container to run in the background
 # [OPTIONAL] Add the `--build` option if you always want to start with a rebuilt image
-docker compose --env-file .env.ids --env-file .env -d --build 
+docker compose --env-file .env.ids --env-file .env up -d --build 
 ```
 
 If you need git support, use this `docker compose` command in place of the previous command.
@@ -22,7 +22,7 @@ You will need to specify the location of your git repo ssh key. **IT'S HIGHLY RE
 
 ```bash
 # Share the SSH_KEY location is needed if you need the ability of managing your code with git from within VS Code
-SSH_KEY=/home/user/.ssh/id_git docker compose --env-file .env.ids --env-file .env -d
+SSH_KEY=/home/user/.ssh/id_git docker compose --env-file .env.ids --env-file .env up -d
 ```
 
 Once the Visual Studio Code Server is operational, you can connect to it using any modern web browser. Enter the local address followed by the port number in your browser's address bar: `http://localhost:port_number?tkn=[TOKEN]`.
@@ -44,7 +44,7 @@ Remember, this Docker Compose solution's main advantage is that it provides a co
 ```bash
 # disable connection token, specifies a different working directory,
 # and changes the web port which will kick off the VSCode Server on localhost:8888
-WDIR=/home/user/dev OPTIONS="-d" SSH_KEY=/home/user/.ssh/id_git PORT=8888 docker compose --env-file .env.ids --env-file .env -d
+WDIR=/home/user/dev OPTIONS="-d" SSH_KEY=/home/user/.ssh/id_git PORT=8888 docker compose --env-file .env.ids --env-file .env up -d
 ```
 
 ## Recommendations
