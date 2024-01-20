@@ -7,7 +7,7 @@ ARG WORKING_DIR
 ARG USER_ID
 ARG GRP_ID
 ARG USER_NAME
-RUN groupadd -g "${GRP_ID}" default
+RUN groupadd -fg "${GRP_ID}" default
 RUN useradd --create-home --no-log-init -u "${USER_ID}" -g "${GRP_ID}" "${USER_NAME}"
 
 # Installs and sets up the required binaries for the VS Code Server to work
@@ -33,4 +33,4 @@ RUN echo "export PATH=\$PATH:/opt/vscode-server" >> /home/${USER_NAME}/.bashrc
 
 
 ENTRYPOINT ["/bin/bash"]
-#CMD [ "/opt/vscode-server/start_code_server.sh" ]
+CMD [ "/opt/vscode-server/start_code_server.sh" ]
