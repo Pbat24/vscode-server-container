@@ -2,3 +2,4 @@ data
 extensions
 serve-web*
 ids.env
+.env.ids
