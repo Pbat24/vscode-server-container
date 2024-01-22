@@ -15,6 +15,6 @@ services:
       - SSH_AUTH_SOCK:${SSH_AUTH_SOCK}
     volumes:
       - $WDIR:$WORKING_DIR
-      - ${SSH_KEY}:/home/${USER_NAME}/.ssh/id_github
+      - ${SSH_KEY}:/home/${USER_NAME}/.ssh/id_git
     working_dir: $WORKING_DIR
     command: [ "/opt/vscode-server/start_code_server.sh", $OPTIONS ]
