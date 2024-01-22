@@ -18,7 +18,7 @@ docker compose --env-file .env.ids --env-file .env up -d --build
 ```
 
 If you need git support, use this `docker compose` command in place of the previous command.
-You will need to specify the location of your git repo ssh key. **IT'S HIGHLY RECOMMENDED THAT YOU USE AN SSH KEY THAT HAS THE PASSPHRASE.**
+You will need to specify the location of your git repo ssh key. **IT'S HIGHLY RECOMMENDED THAT YOU USE AN SSH KEY THAT REQUIRES A PASSPHRASE.**
 
 ```bash
 # Share the SSH_KEY location is needed if you need the ability of managing your code with git from within VS Code
