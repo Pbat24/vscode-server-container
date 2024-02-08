@@ -1,6 +1,6 @@
 # Overview
 
-This Docker Compose solution is specifically designed to execute Visual Studio Code Server. It simplifies the set-up and management of your development environment, enabling you to focus on coding. This solution allows you to run Visual Studio Code Server quickly and easily, fostering efficient software development processes.
+This Docker Compose solution is designed to run a stand alone server for Visual Studio Code. It simplifies the set-up and management of your development environment, enabling you to focus on coding.
 
 ## Quick Start
 
