@@ -10,7 +10,7 @@ services:
     image: vscode-server
     user: ${USER_ID}:${GRP_ID}
     ports:
-      - $PORT:$VS_PORT
+      - $DEFAULT_IP:$DEFAULT_PORT:$VS_PORT
     environment:
       - SSH_AUTH_SOCK:${SSH_AUTH_SOCK}
     volumes:
