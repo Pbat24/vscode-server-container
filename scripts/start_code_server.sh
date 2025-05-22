@@ -1,25 +1,27 @@
 #!/bin/bash
 
+set +x
+
 echo "DEBUG: ARGS=$@"
 
-DISABLE_CONN_TOKEN=""
+DISABLE_CONN_TOKEN="--without-connection-token"
 
 usage() { 
-    echo "Usage: $0 [-d|-h]" 1>&2
+    echo "Usage: $0 [-t|-h]" 1>&2
     echo "options:" 1>&2
-    echo "d     disables the connection token from the URL" 1>&2
+    echo "t     enables the connection token from the URL" 1>&2
     echo "h     prints this usage"  1>&2
     exit 1;
 }
 
-while getopts ":hd" opt; do
+while getopts ":ht" opt; do
   case ${opt} in
     h )
         usage
         ;; 
-    d )
-        echo "Option -d triggerred"
-        DISABLE_CONN_TOKEN="--without-connection-token"
+    t )
+        echo "Option -t triggerred"
+        DISABLE_CONN_TOKEN=""
         ;;
     : )
         echo "Option -$OPTARG requires an argument"
